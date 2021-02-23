@@ -72,11 +72,14 @@ public class DataFileWriter<D> implements Closeable, Flushable {
 
   private byte[] sync; // 16 random bytes
   private int syncInterval = DataFileConstants.DEFAULT_SYNC_INTERVAL;
+  private int recordInterval = DataFileConstants.DEFAULT_RECORD_INTERVAL;
 
   private boolean isOpen;
   private Codec codec;
 
   private boolean flushOnEveryBlock = true;
+
+  private long curBlockPos;
 
   /** Construct a writer, not yet open. */
   public DataFileWriter(DatumWriter<D> dout) {
@@ -126,6 +129,14 @@ public class DataFileWriter<D> implements Closeable, Flushable {
       throw new IllegalArgumentException("Invalid syncInterval value: " + syncInterval);
     }
     this.syncInterval = syncInterval;
+    return this;
+  }
+
+  public DataFileWriter<D> setRecordInterval(int recordInterval) {
+    if (recordInterval < 1 || recordInterval > 10000) {
+      throw new IllegalArgumentException("Invalid recordInterval value: " + recordInterval);
+    }
+    this.recordInterval = recordInterval;
     return this;
   }
 
@@ -347,7 +358,7 @@ public class DataFileWriter<D> implements Closeable, Flushable {
   }
 
   private void writeIfBlockFull() throws IOException {
-    if (bufferInUse() >= syncInterval)
+    if (bufferInUse() >= syncInterval || blockCount >= recordInterval)
       writeBlock();
   }
 
@@ -411,6 +422,7 @@ public class DataFileWriter<D> implements Closeable, Flushable {
         blockCount = 0;
       }
     }
+    curBlockPos = out.tell();
   }
 
   /**
@@ -508,6 +520,10 @@ public class DataFileWriter<D> implements Closeable, Flushable {
     ByteBuffer getByteArrayAsByteBuffer() {
       return ByteBuffer.wrap(buf, 0, count);
     }
+  }
+
+  public long getCurBlockPos() {
+    return this.curBlockPos;
   }
 
 }

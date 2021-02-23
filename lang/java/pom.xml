@@ -22,7 +22,7 @@
   <parent>
     <groupId>org.apache.avro</groupId>
     <artifactId>avro-toplevel</artifactId>
-    <version>1.10.1</version>
+    <version>1.10.1-kf-cdh6.0.1</version>
     <relativePath>../../</relativePath>
   </parent>
 
@@ -39,7 +39,7 @@
 
     <!-- version properties for dependencies -->
 
-    <hadoop.version>3.2.1</hadoop.version>
+    <hadoop.version>3.0.0-cdh6.0.1</hadoop.version>
     <jackson.version>2.11.3</jackson.version>
     <jackson.databind.version>2.11.3</jackson.databind.version>
     <servlet-api.version>4.0.1</servlet-api.version>
@@ -64,7 +64,7 @@
     <zstd-jni.version>1.4.5-12</zstd-jni.version>
     <!-- version properties for plugins -->
     <archetype-plugin.version>3.1.2</archetype-plugin.version>
-    <bundle-plugin-version>4.1.0</bundle-plugin-version>
+    <bundle-plugin-version>5.1.1</bundle-plugin-version>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
     <exec-plugin.version>1.6.0</exec-plugin.version>
     <file-management.version>3.0.0</file-management.version>
