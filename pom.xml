@@ -71,17 +71,17 @@
   </scm>
 
   <distributionManagement>
-		<repository>
+			<repository>
 			<id>releases</id>
 			<name>Nexus Release Repository</name>
-			<url>http://dn3.bid.bds.com:8081/repository/maven-releases/</url>
+			<url>http://nexus.osrt.com:8081/repository/maven-releases/</url>
 		</repository>
 		<snapshotRepository>
 			<id>snapshots</id>
 			<name>Nexus Snapshot Repository</name>
-			<url>http://dn3.bid.bds.com:8081/repository/maven-snapshots/</url>
+			<url>http://nexus.osrt.com:8081/repository/maven-snapshots/</url>
 		</snapshotRepository>
-  </distributionManagement>
+	</distributionManagement>
   
   <issueManagement>
     <system>jira</system>
